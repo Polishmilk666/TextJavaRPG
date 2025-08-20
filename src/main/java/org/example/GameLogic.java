@@ -24,20 +24,19 @@ public class GameLogic {
             System.out.println("Gra wystartowała");
             System.out.println("1. Wyświetl ekwipunek");
             System.out.println("2. Wyświetl inwentarz");
-            System.out.println("3. Załuż przedmiot");
+            /*System.out.println("3. Załuż przedmiot");
             System.out.println("4. Zdejmij przedmiot");
             System.out.println("5. Wyprawa");
-            System.out.println("9. Zapisz");
+            System.out.println("9. Zapisz");*/
             System.out.println("0. Koniec");
 
             String choise = scanner.nextLine().trim();
             switch (choise) {
-                case "1"-> loadPlayer("Loco");//zmienić na wyświetlanie ekwipunku
-                case "2" -> loadEquipment();
-                /*case "3" -> loadinventory();
-                case "4" -> equipItem();
-                case "5" -> unequipItem();
-                case "9" -> saveGame();*/
+                case "1" -> loadEquipment();
+                case "2" -> loadInventory();
+                /*case "3" -> equipItem();
+                case "4" -> unequipItem();
+                case "5" -> saveGame();*/
                 case "0" -> running = false;
                 default -> System.out.println("Opcja nieznana");
             }
@@ -51,5 +50,9 @@ public class GameLogic {
             Item it = player.equipment.get(s);
             System.out.println(s + ": " + (it == null ? "-" : it.toString()));
         }
+    }
+    private void loadInventory(){
+        System.out.println("Inwentory loaded");
+
     }
 }
