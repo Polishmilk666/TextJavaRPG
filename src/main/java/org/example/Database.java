@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class Database {
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/rpgconsole";
+    private static final String URL = "jdbc:postgresql://10.1.1.20:5432/rpgconsole";
     private static final String USER = "postgres";
-    private static final String PASS = "86122404";
+    private static final String PASS = "postgres";
 
     public static Connection connection () throws SQLException {
         String url  = System.getenv().getOrDefault("URL", URL);

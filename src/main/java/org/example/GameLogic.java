@@ -21,7 +21,10 @@ public class GameLogic {
     public void StartGame() throws SQLException {
         boolean running = true;
         while (running){
-            System.out.println("Gra wystartowała");
+            for(int i =1; i<30; i++) {
+                System.out.print("+");
+            }
+            System.out.println();
             System.out.println("1. Wyświetl ekwipunek");
             System.out.println("2. Wyświetl inwentarz");
             /*System.out.println("3. Załuż przedmiot");
@@ -44,7 +47,7 @@ public class GameLogic {
     }
 
     private void loadEquipment() {
-        System.out.println("Wyposażenie");
+        System.out.println("Wyposażenie gracza " + player.getPlayerName());
         String[] slots = {"helmet", "armor", "pants", "boots", "gloves", "weapon", "shield"};
         for (String s : slots){
             Item it = player.equipment.get(s);

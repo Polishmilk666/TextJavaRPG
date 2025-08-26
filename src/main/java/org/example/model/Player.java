@@ -24,7 +24,7 @@ public class Player {
         this.playerHp = 50;
     }
 
-
-
-
+    public String getPlayerName() {
+        return playerName;
+    }
 }
