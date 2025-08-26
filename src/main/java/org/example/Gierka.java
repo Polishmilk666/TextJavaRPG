@@ -19,11 +19,12 @@ public class Gierka{
 
             if("2".equals(choose)){
 
-                System.out.println("Funkcja do tworzenia postaci");
+                System.out.println("+++++++++ Utwórz nową postać +++++++++");
+                System.out.println();
                 System.out.println("Podaj nazwę postacji");
                 player = playerDAO.loadPlayer(scanner.nextLine().trim());
             }else{
-                System.out.println("Nowa gra!!!");
+                System.out.println("+++++++++ Nowa gra +++++++++");
                 System.out.println("Podaj nazwę postaci");
                 player=playerDAO.createPlayer(scanner.nextLine().trim());
 

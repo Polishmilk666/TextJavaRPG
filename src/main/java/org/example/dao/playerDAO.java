@@ -33,7 +33,20 @@ public class playerDAO {
     }
 
     public static Player createPlayer(String playerName) throws SQLException {
-        Player player = loadPlayer(playerName);
-        return player;
+       Player p = loadPlayer(playerName);
+       if( p!=null) return p;
+       try(Connection conn = Database.connection()){
+           try(PreparedStatement ps= conn.prepareStatement(" INSERT INTO player (playername)" +
+                   "VALUES (?) RETURNING playerid")){
+               ps.setString(1, playerName);
+               try(ResultSet rs = ps.executeQuery()){
+                   rs.next();
+                   int playerId = rs.getInt(1);
+                   Player player = new Player(playerName);
+                   player.playerId=playerId;
+                   return player;
+               }
+           }
+       }
     }
 }
