@@ -1,11 +1,14 @@
 package org.example;
 
+import org.example.dao.InventoryDAO;
 import org.example.model.Item;
 import org.example.model.Player;
 
-import javax.xml.crypto.Data;
+
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import static org.example.dao.playerDAO.loadPlayer;
@@ -36,7 +39,7 @@ public class GameLogic {
             String choise = scanner.nextLine().trim();
             switch (choise) {
                 case "1" -> loadEquipment();
-                case "2" -> loadInventory();
+                case "2" -> loadInventory(player);
                 /*case "3" -> equipItem();
                 case "4" -> unequipItem();
                 case "5" -> saveGame();*/
@@ -54,8 +57,19 @@ public class GameLogic {
             System.out.println(s + ": " + (it == null ? "-" : it.toString()));
         }
     }
-    private void loadInventory(){
-        System.out.println("Inwentory loaded");
+    private void loadInventory(Player player){
+                try{
+            Map<String, Item> inventory = InventoryDAO.getInventoryForPlayer(player.getPlayerId());
+
+            System.out.println("Załadowano ekwipunek dla gracza " + player.getPlayerName());
+            for(String slot : List.of("helm", "armor", "rekawice", "buty", "tarcza", "bron")){
+                    Item it=inventory.get(slot);
+                    System.out.println();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 }

@@ -27,4 +27,8 @@ public class Player {
     public String getPlayerName() {
         return playerName;
     }
+
+    public int getPlayerId() {
+        return playerId;
+    }
 }
