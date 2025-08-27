@@ -19,6 +19,25 @@ public class Item {
         this.itemDefence = itemDefence;
     }
 
+    public int getItemId() {
+        return itemId;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public String getItemType() {
+        return itemType;
+    }
+
+    public int getItemAttack() {
+        return itemAttack;
+    }
+
+    public int getItemDefence() {
+        return itemDefence;
+    }
 
     @Override
     public String toString() {
