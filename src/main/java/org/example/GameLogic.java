@@ -64,7 +64,7 @@ public class GameLogic {
             System.out.println("Załadowano ekwipunek dla gracza " + player.getPlayerName());
             for(String slot : List.of("helm", "armor", "rekawice", "buty", "tarcza", "bron")){
                     Item it=inventory.get(slot);
-                    System.out.println();
+                System.out.println(slot + ": " + (it==null ? "-" :it.toString()));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

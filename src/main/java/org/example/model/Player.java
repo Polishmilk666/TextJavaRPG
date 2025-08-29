@@ -11,7 +11,6 @@ public class Player {
     public int playerLevel;
     public int playerXp;
     public int playerHp;
-    public List<Item> inventory = new ArrayList<>();
     public Map<String, Item> equipment = new HashMap<>();
 
     public Player() {
