@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.dao.InventoryDAO;
+import org.example.model.Inventory;
 import org.example.model.Item;
 import org.example.model.Player;
 
@@ -59,13 +60,20 @@ public class GameLogic {
     }
     private void loadInventory(Player player){
                 try{
-            Map<String, Item> inventory = InventoryDAO.getInventoryForPlayer(player.getPlayerId());
+                    Map<String, List<Inventory>> inventory = InventoryDAO.getInventoryForPlayer(player.getPlayerId());
 
-            System.out.println("Załadowano ekwipunek dla gracza " + player.getPlayerName());
-            for(String slot : List.of("helm", "armor", "rekawice", "buty", "tarcza", "bron")){
-                    Item it=inventory.get(slot);
-                System.out.println(slot + ": " + (it==null ? "-" :it.toString()));
-            }
+                    System.out.println("Załadowano ekwipunek dla gracza " + player.getPlayerName());
+                    for (Map.Entry<String, List<Inventory>> entry : inventory.entrySet()) {
+                        String slot = entry.getKey();
+                        List<Inventory> items = entry.getValue();
+
+                        System.out.println("Slot: " + slot);
+                        for (Inventory inv : items) {
+                            Item it = inv.item;
+                            String equipped = inv.isEquipped() ? "[E]" : "";
+                            System.out.println("  - " + (it == null ? "-" : it.toString()) + " " + equipped);
+                        }
+                    }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
