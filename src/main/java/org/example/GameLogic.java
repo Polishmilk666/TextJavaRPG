@@ -50,19 +50,32 @@ public class GameLogic {
         }
     }
 
-    private void loadEquipment() {
-        System.out.println("Wyposażenie gracza " + player.getPlayerName());
-        String[] slots = {"helmet", "armor", "pants", "boots", "gloves", "weapon", "shield"};
-        for (String s : slots){
-            Item it = player.equipment.get(s);
-            System.out.println(s + ": " + (it == null ? "-" : it.toString()));
+    private void loadEquipment(Player player) {
+        try {
+            System.out.println("Wyposażenie gracza " + player.getPlayerName());
+            Map<String, List<Inventory>> equppment = InventoryDAO.getEquippedForPlayer(player.getPlayerId());
+            /* for (Map.Entry<String, List<Inventory>> entry : equppment.entrySet()) {
+                String slot = entry.getKey();
+                List<Inventory> items = entry.getValue();
+
+                System.out.println("Slot: " + slot);
+                for (Inventory inv : items) {
+                    Item it = inv.item;
+                    String equipped = inv.isEquipped() ? "[E]" : "";
+                    System.out.println("  - " + (it == null ? "-" : it.toString()) + " " + equipped);
+                }
+            }*/
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+
     }
     private void loadInventory(Player player){
                 try{
                     Map<String, List<Inventory>> inventory = InventoryDAO.getInventoryForPlayer(player.getPlayerId());
 
-                    System.out.println("Załadowano ekwipunek dla gracza " + player.getPlayerName());
+                    System.out.println("Załadowano inwentarz dla gracza " + player.getPlayerName());
                     for (Map.Entry<String, List<Inventory>> entry : inventory.entrySet()) {
                         String slot = entry.getKey();
                         List<Inventory> items = entry.getValue();
