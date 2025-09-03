@@ -3,6 +3,7 @@ package org.example.dao;
 import org.example.Database;
 import org.example.model.Player;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,18 @@ import java.sql.SQLException;
 
 public class playerDAO {
 
+
+    public static boolean checkIfPlayerExists(String playerName) throws SQLException{
+           try (Connection conn = Database.connection()){
+           try(PreparedStatement ps = conn.prepareStatement("SELECT 1 FROM player WHERE playername = ?")){
+               ps.setString(1, playerName);
+               try(ResultSet rs=ps.executeQuery()){
+                   return rs.next();
+               }
+           }
+        }
+
+    }
     public static Player loadPlayer(String playerName) throws SQLException{
         try(Connection conn = Database.connection()){
             Player player = null;

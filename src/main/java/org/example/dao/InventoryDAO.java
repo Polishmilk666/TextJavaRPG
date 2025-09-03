@@ -55,8 +55,8 @@ public class InventoryDAO {
         return inventory;
         }
 
-        public static Map<String, List<Inventory>> getEquippedForPlayer(int playerId) throws SQLException{
-        Map<String, List<Inventory>> equipped = new HashMap<>();
+        public static Map<String, Inventory> getEquippedForPlayer(int playerId) throws SQLException{
+        Map<String, Inventory> equipped = new HashMap<>();
             String query = "SELECT inv.inventoryid, inv.slot, inv.equipped, " +
                     "i.itemid, i.itemname, i.itemtype, i.itemattack, i.itemdefence " +
                     "FROM inventory inv " +
@@ -67,27 +67,24 @@ public class InventoryDAO {
                 try(PreparedStatement ps = conn.prepareStatement(query)){
                     ps.setInt(1, playerId);
                     try(ResultSet rs = ps.executeQuery()){
-                        while(rs.next()){
-                            Item item = null;
-                            if(rs.getInt("itmeid") !=0){
-                                item = new Item(
+                        while(rs.next()) {
+                            Item item = new Item(
                                         rs.getInt("itemid"),
                                         rs.getString("itemname"),
                                         rs.getString("itemtype"),
                                         rs.getInt("itemattack"),
                                         rs.getInt("itemdefence")
                                 );
-                            }
-                            String slot = rs.getString("slot");
-                            boolean equippedCol = rs.getBoolean("equipped");
 
-                            Inventory equp = new Inventory(
+
+                            Inventory inv = new Inventory(
                                     rs.getInt("inventoryid"),
                                     playerId,
                                     item,
-                                    equippedCol
+                                    rs.getBoolean("equipped")
                             );
-                            equipped.computeIfAbsent(slot, k -> new ArrayList<>()).add(equp);
+                            String slot = rs.getString("slot");
+                            equipped.put(slot, inv);
                         }
                     }
                 }

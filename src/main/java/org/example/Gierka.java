@@ -22,7 +22,12 @@ public class Gierka{
                 System.out.println("+++++++++ Utwórz nową postać +++++++++");
                 System.out.println();
                 System.out.println("Podaj nazwę postacji");
-                player = playerDAO.loadPlayer(scanner.nextLine().trim());
+                String playerName = scanner.nextLine().trim();
+                if(playerDAO.checkIfPlayerExists(playerName)){
+                    System.out.println("Gracz o podanej naziwe już istnieje!");
+                    return;
+                }
+                player = playerDAO.createPlayer(playerName);
             }else{
                 System.out.println("+++++++++ Nowa gra +++++++++");
                 System.out.println("Podaj nazwę postaci");

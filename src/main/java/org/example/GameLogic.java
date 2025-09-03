@@ -39,7 +39,7 @@ public class GameLogic {
 
             String choise = scanner.nextLine().trim();
             switch (choise) {
-                case "1" -> loadEquipment();
+                case "1" -> loadEquipment(player);
                 case "2" -> loadInventory(player);
                 /*case "3" -> equipItem();
                 case "4" -> unequipItem();
@@ -53,18 +53,18 @@ public class GameLogic {
     private void loadEquipment(Player player) {
         try {
             System.out.println("Wyposażenie gracza " + player.getPlayerName());
-            Map<String, List<Inventory>> equppment = InventoryDAO.getEquippedForPlayer(player.getPlayerId());
-            /* for (Map.Entry<String, List<Inventory>> entry : equppment.entrySet()) {
-                String slot = entry.getKey();
-                List<Inventory> items = entry.getValue();
+            Map<String, Inventory> equipped = InventoryDAO.getEquippedForPlayer(player.getPlayerId());
+            String[] slots = {"helmet", "armor", "pants", "boots", "gloves", "weapon", "shield"};
 
-                System.out.println("Slot: " + slot);
-                for (Inventory inv : items) {
-                    Item it = inv.item;
-                    String equipped = inv.isEquipped() ? "[E]" : "";
-                    System.out.println("  - " + (it == null ? "-" : it.toString()) + " " + equipped);
+            for (String slot : slots) {
+                Inventory inv = equipped.get(slot);
+                if (inv != null && inv.item != null) {
+                    System.out.println(slot + ": " + inv.item.getItemName() + " Atak: " + inv.item.getItemAttack() +
+                            " Obrona: " + inv.item.getItemDefence());
+                } else {
+                    System.out.println(slot + ": -");
                 }
-            }*/
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
