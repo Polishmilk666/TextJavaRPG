@@ -29,6 +29,7 @@ public class GameLogic {
                 System.out.print("+");
             }
             System.out.println();
+            System.out.println();
             System.out.println("1. Wyświetl ekwipunek");
             System.out.println("2. Wyświetl inwentarz");
             /*System.out.println("3. Załuż przedmiot");

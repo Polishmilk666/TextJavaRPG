@@ -19,20 +19,35 @@ public class Gierka{
 
             if("2".equals(choose)){
 
-                System.out.println("+++++++++ Utwórz nową postać +++++++++");
-                System.out.println();
-                System.out.println("Podaj nazwę postacji");
-                String playerName = scanner.nextLine().trim();
-                if(playerDAO.checkIfPlayerExists(playerName)){
-                    System.out.println("Gracz o podanej naziwe już istnieje!");
-                    return;
-                }
-                player = playerDAO.createPlayer(playerName);
-            }else{
-                System.out.println("+++++++++ Nowa gra +++++++++");
-                System.out.println("Podaj nazwę postaci");
-                player=playerDAO.createPlayer(scanner.nextLine().trim());
+                Player loadPlayer = null;
+                while(loadPlayer==null) {
+                    System.out.println("+++++++++ Wczytywanie postaci +++++++++");
+                    System.out.println();
+                    System.out.println("Podaj nazwę postacji");
+                    String readPlayer = scanner.nextLine().trim();
 
+                    if (!playerDAO.checkIfPlayerExists(readPlayer)) {
+                        System.out.println("Gracz o podanej naziwe nie istnieje!");
+                    }else{
+                        loadPlayer=playerDAO.createPlayer(readPlayer);
+                    }
+
+                }
+                player = loadPlayer;
+            }else {
+                Player newPlayer = null;
+                while(newPlayer==null) {
+                    System.out.println("+++++++++ Nowa gra +++++++++");
+                    System.out.println("Podaj nazwę postaci");
+                    String readPlayer = scanner.nextLine().trim();
+
+                    if (playerDAO.checkIfPlayerExists(readPlayer)) {
+                        System.out.println("Gracz o takiej nazwie już istnieje!");
+                    } else {
+                        newPlayer = playerDAO.createPlayer(readPlayer);
+                    }
+                }
+                player = newPlayer;
             }
 
 

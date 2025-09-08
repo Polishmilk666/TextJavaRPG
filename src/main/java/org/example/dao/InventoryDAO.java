@@ -92,5 +92,19 @@ public class InventoryDAO {
 
         return equipped;
         }
+
+        public static void equipItem(int plyerId, String slot, int itemId, boolean equipped) throws SQLException{
+            String query = "UPDATE inventory SET equipped=true WHERE playerid = ? and itemid = ?";
+            try(Connection conn = Database.connection()){
+                try(PreparedStatement ps= conn.prepareStatement(query)){
+                    ps.setInt(1, plyerId);
+                    ps.setInt(2,itemId);
+                    ps.executeUpdate();
+
+                }
+
+            }
+
+        }
     }
 
