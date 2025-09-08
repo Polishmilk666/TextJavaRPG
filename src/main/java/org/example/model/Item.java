@@ -41,6 +41,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return itemName + "(" + itemType+ " " + itemAttack + " " + itemDefence +")";
+        return "("+ ")"+ itemId + itemName + "(" + itemType+ " " + itemAttack + " " + itemDefence +")";
     }
 }
