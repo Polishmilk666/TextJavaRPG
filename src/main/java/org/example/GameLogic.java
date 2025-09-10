@@ -8,6 +8,7 @@ import org.example.model.Player;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -94,7 +95,12 @@ public class GameLogic {
 
 
     }
-    private void equipItem(){
+    /*private void equipItem(Player player){
+        try{
+            System.out.println("Podaj ID przedmiotu do założenia: ");
 
-    }
+        }catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }*/
 }
