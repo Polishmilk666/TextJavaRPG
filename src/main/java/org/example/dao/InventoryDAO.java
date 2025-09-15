@@ -93,18 +93,34 @@ public class InventoryDAO {
         return equipped;
         }
 
-        public static void equipItem(int plyerId, String slot, int itemId, boolean equipped) throws SQLException{
-            String query = "UPDATE inventory SET equipped=true WHERE playerid = ? and itemid = ?";
+        public static void equipItem(int inventoryId, int playerId) throws SQLException{
+        String queryUnEquip = "UPDATE inventory SET equipped=false WHERE playerid=? and slot = (SELECT slot FROM inventory WHERE inventoryid=?)";
+        String queryEquip = "UPDATE inventory SET equipped=true WHERE inventoryid = ?";
             try(Connection conn = Database.connection()){
-                try(PreparedStatement ps= conn.prepareStatement(query)){
-                    ps.setInt(1, plyerId);
-                    ps.setInt(2,itemId);
-                    ps.executeUpdate();
+                try(PreparedStatement psUnEquip= conn.prepareStatement(queryUnEquip);
+                    PreparedStatement psEquip=conn.prepareStatement(queryEquip)){
 
+                    psUnEquip.setInt(1, playerId);
+                    psUnEquip.setInt(2, inventoryId);
+                    psUnEquip.executeUpdate();
+
+                    psEquip.setInt(1, inventoryId);
+                    psEquip.executeUpdate();
                 }
-
             }
+        }
+        public static void unEquipItem(int inventoryId, int playerId){
+            String queryUnEquip = "UPDATE inventory SET equipped=false WHERE playerid=? and slot = (SELECT slot FROM inventory WHERE inventoryid=?)";
+            try(Connection conn = Database.connection()){
+                try(PreparedStatement psUnEquip= conn.prepareStatement(queryUnEquip)){
 
+                    psUnEquip.setInt(1, playerId);
+                    psUnEquip.setInt(2, inventoryId);
+                    psUnEquip.executeUpdate();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
