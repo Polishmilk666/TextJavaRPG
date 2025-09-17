@@ -8,7 +8,6 @@ import java.util.Map;
 public class Player {
     public int playerId;
     public String playerName;
-    public int playerLevel;
     public int playerXp;
     public int playerHp;
     public Map<String, Item> equipment = new HashMap<>();
@@ -18,9 +17,8 @@ public class Player {
 
     public Player(String playerName) {
         this.playerName = playerName;
-        this.playerLevel = 1;
         this.playerXp = 1;
-        this.playerHp = 50;
+        this.playerHp = 100;
     }
 
     public String getPlayerName() {

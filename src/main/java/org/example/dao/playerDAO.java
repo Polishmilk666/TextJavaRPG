@@ -33,7 +33,7 @@ public class playerDAO {
                         player = new Player();
                         player.playerId=rs.getInt("playerid");
                         player.playerName=rs.getString("playername");
-                        player.playerLevel=rs.getInt("playerlevel");
+                        player.playerHp=rs.getInt("playerhp");
                         player.playerXp=rs.getInt("playerxp");
                     }else {
                         return null;
@@ -61,5 +61,26 @@ public class playerDAO {
                }
            }
        }
+    }
+    public static Player loadPlayerStat(int playerId) throws SQLException{
+        try(Connection conn = Database.connection()){
+            Player player = null;
+            try(PreparedStatement ps = conn.prepareStatement("SELECT * from player WHERE playerid=?")){
+                ps.setInt(1, playerId);
+                try(ResultSet rs = ps.executeQuery()){
+                    if(rs.next()){
+                        player = new Player();
+                        player.playerId=rs.getInt("playerid");
+                        player.playerName=rs.getString("playername");
+                        player.playerHp=rs.getInt("playerhp");
+                        player.playerXp=rs.getInt("playerxp");
+                    }else {
+                        return null;
+                    }
+                }
+                return player;
+            }
+
+        }
     }
 }
