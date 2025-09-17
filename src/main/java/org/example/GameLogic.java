@@ -7,15 +7,13 @@ import org.example.model.Item;
 import org.example.model.Player;
 
 
-import java.sql.Connection;
+
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import static org.example.dao.playerDAO.loadPlayer;
-import static org.example.dao.playerDAO.loadPlayerStat;
+
 
 public class GameLogic {
     private final Scanner scanner = new Scanner(System.in);
@@ -118,7 +116,7 @@ public class GameLogic {
         InventoryDAO.unEquipItem(invenotryId, player.getPlayerId());
         System.out.println("Przedmiot zdjęty");
     }
-    private void showPlayerStat() throws SQLException {
+    private void showPlayerStat() throws SQLException{
         try{
             Player playerStat = playerDAO.loadPlayerStat(player.getPlayerId());
             if(playerStat !=null){
