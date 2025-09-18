@@ -12,17 +12,6 @@ import java.sql.SQLException;
 public class playerDAO {
 
 
-    public static boolean checkIfPlayerExists(String playerName) throws SQLException{
-           try (Connection conn = Database.connection()){
-           try(PreparedStatement ps = conn.prepareStatement("SELECT 1 FROM player WHERE playername = ?")){
-               ps.setString(1, playerName);
-               try(ResultSet rs=ps.executeQuery()){
-                   return rs.next();
-               }
-           }
-        }
-
-    }
     public static Player loadPlayer(String playerName) throws SQLException{
         try(Connection conn = Database.connection()){
             Player player = null;
@@ -62,6 +51,19 @@ public class playerDAO {
            }
        }
     }
+
+    public static boolean checkIfPlayerExists(String playerName) throws SQLException{
+        try (Connection conn = Database.connection()){
+            try(PreparedStatement ps = conn.prepareStatement("SELECT 1 FROM player WHERE playername = ?")){
+                ps.setString(1, playerName);
+                try(ResultSet rs=ps.executeQuery()){
+                    return rs.next();
+                }
+            }
+        }
+
+    }
+
     public static Player loadPlayerStat(int playerId) throws SQLException{
         try(Connection conn = Database.connection()){
             Player player = null;
@@ -73,6 +75,23 @@ public class playerDAO {
                         player.playerId=rs.getInt("playerid");
                         player.playerName=rs.getString("playername");
                         player.playerHp=rs.getInt("playerhp");
+                    }else {
+                        return null;
+                    }
+                }
+                return player;
+            }
+        }
+    }
+
+    public static Player loadPlayerXp(int playerId) throws SQLException{
+        try(Connection conn = Database.connection()){
+            Player player = null;
+            try(PreparedStatement ps = conn.prepareStatement("SELECT playerxp from player WHERE playerid=?")){
+                ps.setInt(1, playerId);
+                try(ResultSet rs = ps.executeQuery()){
+                    if(rs.next()){
+                        player = new Player();
                         player.playerXp=rs.getInt("playerxp");
                     }else {
                         return null;
@@ -80,7 +99,6 @@ public class playerDAO {
                 }
                 return player;
             }
-
         }
     }
 }

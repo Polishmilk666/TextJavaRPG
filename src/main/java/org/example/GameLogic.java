@@ -119,11 +119,21 @@ public class GameLogic {
     private void showPlayerStat() throws SQLException{
         try{
             Player playerStat = playerDAO.loadPlayerStat(player.getPlayerId());
+            Player level = playerDAO.loadPlayerXp(player.getPlayerId());
             if(playerStat !=null){
+                int lvl;
+
+                if(level.playerXp<=100){
+                    lvl = 1;
+                }else{
+                    lvl = player.playerXp/100;
+                }
+
                 System.out.println("++++++STATYSTKI GRACZA "+ player.playerName + "++++++");
                 System.out.println("Nazwa: " + player.playerName);
                 System.out.println("Hp: " + player.playerHp);
                 System.out.println("XP: " + player.playerXp);
+                System.out.println("Level: " + lvl);
             }else {
                 System.out.println("Nie można wczytać statystyk");
             }
