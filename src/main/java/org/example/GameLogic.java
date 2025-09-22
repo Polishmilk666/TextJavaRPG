@@ -1,7 +1,9 @@
 package org.example;
 
+import org.example.dao.EnemyDAO;
 import org.example.dao.InventoryDAO;
 import org.example.dao.playerDAO;
+import org.example.model.Enemy;
 import org.example.model.Inventory;
 import org.example.model.Item;
 import org.example.model.Player;
@@ -36,8 +38,7 @@ public class GameLogic {
             System.out.println("3. Załuż przedmiot");
             System.out.println("4. Zdejmij przedmiot");
             System.out.println("5. Wyświetl statystyki");
-            /*System.out.println("5. Wyprawa");
-            System.out.println("9. Zapisz");*/
+            System.out.println("6. Wyprawa - test");
             System.out.println("0. Koniec");
 
             String choise = scanner.nextLine().trim();
@@ -47,12 +48,13 @@ public class GameLogic {
                 case "3" -> equipItem(player);
                 case "4" -> unEquipItem(player);
                 case "5" -> showPlayerStat();
-                /*case "5" -> saveGame();*/
+                case "6" -> showEnemy();
                 case "0" -> running = false;
                 default -> System.out.println("Opcja nieznana");
             }
         }
     }
+
 
     private void loadEquipment(Player player) {
         try {
@@ -142,4 +144,11 @@ public class GameLogic {
         }
 
     }
+    private void showEnemy() throws SQLException {
+        Player level = playerDAO.loadPlayerXp(player.getPlayerId());
+        int enemyLevelToLoad = (level.playerXp)/100;
+        Enemy enemy = EnemyDAO.getEnemy(enemyLevelToLoad);
+        System.out.println(enemy.getEnemyName());
+    }
+
 }
