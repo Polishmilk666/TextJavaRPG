@@ -147,8 +147,17 @@ public class GameLogic {
     private void showEnemy() throws SQLException {
         Player level = playerDAO.loadPlayerXp(player.getPlayerId());
         int enemyLevelToLoad = (level.playerXp)/100;
+        int rand;
+        if(enemyLevelToLoad<=10){
+            rand = (int) (Math.random()*10);
+        }else{
+            rand = (int) (Math.random()*100);
+        }
+
+
         Enemy enemy = EnemyDAO.getEnemy(enemyLevelToLoad);
-        System.out.println(enemy.getEnemyName());
+        System.out.println("Przeciwnik: " + enemy.getEnemyName());
+        System.out.println("Random: " + rand);
     }
 
 }
