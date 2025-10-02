@@ -33,4 +33,10 @@ public class Enemy {
     public int getEnemyLevel() {
         return enemyLevel;
     }
+
+
+    @Override
+    public String toString() {
+        return "Spotkałeś: " + enemyName + "\nLevel: " + enemyLevel + "\nZdrowie: " + enemyHp + "\nAtak: " + enemyAttack;
+    }
 }

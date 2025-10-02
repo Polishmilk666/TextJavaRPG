@@ -156,8 +156,20 @@ public class GameLogic {
 
 
         Enemy enemy = EnemyDAO.getEnemy(enemyLevelToLoad);
-        System.out.println("Przeciwnik: " + enemy.getEnemyName());
+        System.out.println(enemy.toString());
         System.out.println("Random: " + rand);
+
+        System.out.println("Co chcesz zrobić?");
+        System.out.println("1. Atak");
+        System.out.println("2. Odwrót");
+        int action = Integer.parseInt(scanner.nextLine().trim());
+
+        if(action==1){
+            System.out.println("Metoda do walki");
+        }
+        else{
+            System.out.println("Uciełeś");;
+        }
     }
 
 }
