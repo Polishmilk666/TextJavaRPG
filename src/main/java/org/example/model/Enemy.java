@@ -34,6 +34,21 @@ public class Enemy {
         return enemyLevel;
     }
 
+    public void setEnemyName(String enemyName) {
+        this.enemyName = enemyName;
+    }
+
+    public void setEnemyHp(int enemyHp) {
+        this.enemyHp = enemyHp;
+    }
+
+    public void setEnemyAttack(int enemyAttack) {
+        this.enemyAttack = enemyAttack;
+    }
+
+    public void setEnemyLevel(int enemyLevel) {
+        this.enemyLevel = enemyLevel;
+    }
 
     @Override
     public String toString() {

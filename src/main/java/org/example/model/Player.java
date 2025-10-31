@@ -27,6 +27,23 @@ public class Player {
     public int getPlayerId() {
         return playerId;
     }
+    public int getPlayerHp(){
+        return playerHp;
+    }
 
+    public int getPlayerXp() {
+        return playerXp;
+    }
 
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public void setPlayerXp(int playerXp) {
+        this.playerXp = playerXp;
+    }
+
+    public void setPlayerHp(int playerHp) {
+        this.playerHp = playerHp;
+    }
 }

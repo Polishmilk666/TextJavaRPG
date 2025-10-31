@@ -165,7 +165,29 @@ public class GameLogic {
         int action = Integer.parseInt(scanner.nextLine().trim());
 
         if(action==1){
-            System.out.println("Metoda do walki");
+            int playerHp = player.getPlayerHp();
+            int enemyHp = enemy.getEnemyHp();
+            Player playerXp = playerDAO.loadPlayerXp(player.getPlayerId());
+            while (playerHp>0 && enemyHp>0){
+                int playerDamage = (10*3) + (int)(Math.random()*3);
+                enemy.setEnemyHp(enemy.getEnemyHp() - playerDamage);
+                System.out.println("Zadałeś: " + playerDamage + " obrażeń wrogowi zostało " + enemy.getEnemyHp());
+                if(enemy.getEnemyHp()<=0){
+                    System.out.println("Wróg został pokonany! Wygrałeś!");
+                    player.setPlayerXp(player.getPlayerXp() + enemy.getEnemyLevel()*10);
+                    System.out.println("Zdobyłeś " + enemy.getEnemyLevel()*10 + " expa");
+                    break;
+                }
+
+                int enemyDamage = (10*3) + (int)(Math.random()*3);
+                player.setPlayerHp(player.getPlayerHp() - enemyDamage);
+                System.out.println("Wróg zadał: " + enemyDamage + " wróg zdała ci: " + player.getPlayerHp());
+                if(player.getPlayerHp()<=0){
+                    System.out.println("Zostałeś pokonany musiałeś uciekać!");
+                    break;
+                }
+
+            }
         }
         else{
             System.out.println("Uciełeś");;
