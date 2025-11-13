@@ -38,7 +38,7 @@ public class GameLogic {
             System.out.println("3. Załuż przedmiot");
             System.out.println("4. Zdejmij przedmiot");
             System.out.println("5. Wyświetl statystyki");
-            System.out.println("6. Wyprawa - test");
+            System.out.println("6. Wyprawa");
             System.out.println("0. Koniec");
 
             String choise = scanner.nextLine().trim();
@@ -48,7 +48,7 @@ public class GameLogic {
                 case "3" -> equipItem(player);
                 case "4" -> unEquipItem(player);
                 case "5" -> showPlayerStat();
-                case "6" -> showEnemy();
+                case "6" -> expedition();
                 case "0" -> running = false;
                 default -> System.out.println("Opcja nieznana");
             }
@@ -114,8 +114,8 @@ public class GameLogic {
     private void unEquipItem(Player player){
         loadInventory(player);
         System.out.println("Podaj ID przedmiotu do zdjęcia");
-        int invenotryId = Integer.parseInt(scanner.nextLine().trim());
-        InventoryDAO.unEquipItem(invenotryId, player.getPlayerId());
+        int inventoryId = Integer.parseInt(scanner.nextLine().trim());
+        InventoryDAO.unEquipItem(inventoryId, player.getPlayerId());
         System.out.println("Przedmiot zdjęty");
     }
     private void showPlayerStat() throws SQLException{
@@ -124,7 +124,6 @@ public class GameLogic {
             Player level = playerDAO.loadPlayerXp(player.getPlayerId());
             if(playerStat !=null){
                 int lvl;
-
                 if(level.playerXp<=100){
                     lvl = 1;
                 }else{
@@ -144,7 +143,7 @@ public class GameLogic {
         }
 
     }
-    private void showEnemy() throws SQLException {
+    private void expedition() throws SQLException {
         Player level = playerDAO.loadPlayerXp(player.getPlayerId());
         int enemyLevelToLoad = (level.playerXp)/100;
         int rand;
