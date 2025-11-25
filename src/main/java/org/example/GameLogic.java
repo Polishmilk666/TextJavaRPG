@@ -110,8 +110,8 @@ public class GameLogic {
             System.out.println("Błąd!!! Nie podałeś wartości liczbowej");
             return;
         }
-        int inventoryId = Integer.parseInt(input);
-        InventoryDAO.equipItem(inventoryId, player.getPlayerId());
+        int itemId = Integer.parseInt(input);
+        InventoryDAO.equipItem(itemId, player.getPlayerId());
             System.out.println("Przedmiot założony");
         } catch (Exception e) {
             System.out.println("Błąd podczas zakładania przedmiotu " + e.getMessage());
@@ -126,8 +126,8 @@ public class GameLogic {
                 System.out.println("Błąd!!! Nie podałeś wartości liczbowej");
                 return;
             }
-            int inventoryId = Integer.parseInt(input);
-            InventoryDAO.unEquipItem(inventoryId, player.getPlayerId());
+            int itemId = Integer.parseInt(input);
+            InventoryDAO.unEquipItem(itemId, player.getPlayerId());
             System.out.println("Przedmiot zdjęty");
         }catch (Exception e){
             System.out.println("Błąd podczas zdejmowania przedmiotu " + e.getMessage());
