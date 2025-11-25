@@ -101,22 +101,38 @@ public class GameLogic {
 
     }
     private void equipItem(Player player){
+        try {
         loadInventory(player);
         System.out.println("Podaj ID przedmiotu do założenia: ");
-        int inventoryId = Integer.parseInt(scanner.nextLine().trim());
-        try {
-            InventoryDAO.equipItem(inventoryId, player.getPlayerId());
+        String input = scanner.nextLine().trim();
+
+        if(!input.matches("\\d+")){
+            System.out.println("Błąd!!! Nie podałeś wartości liczbowej");
+            return;
+        }
+        int inventoryId = Integer.parseInt(input);
+        InventoryDAO.equipItem(inventoryId, player.getPlayerId());
             System.out.println("Przedmiot założony");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            System.out.println("Błąd podczas zakładania przedmiotu " + e.getMessage());
         }
     }
     private void unEquipItem(Player player){
-        loadInventory(player);
-        System.out.println("Podaj ID przedmiotu do zdjęcia");
-        int inventoryId = Integer.parseInt(scanner.nextLine().trim());
-        InventoryDAO.unEquipItem(inventoryId, player.getPlayerId());
-        System.out.println("Przedmiot zdjęty");
+        try {
+            loadInventory(player);
+            System.out.println("Podaj ID przedmiotu do zdjęcia");
+            String input = scanner.nextLine().trim();
+            if(!input.matches("\\d+")){
+                System.out.println("Błąd!!! Nie podałeś wartości liczbowej");
+                return;
+            }
+            int inventoryId = Integer.parseInt(input);
+            InventoryDAO.unEquipItem(inventoryId, player.getPlayerId());
+            System.out.println("Przedmiot zdjęty");
+        }catch (Exception e){
+            System.out.println("Błąd podczas zdejmowania przedmiotu " + e.getMessage());
+        }
+
     }
     private void showPlayerStat() throws SQLException{
         try{

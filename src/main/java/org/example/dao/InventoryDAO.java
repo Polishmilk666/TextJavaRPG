@@ -106,7 +106,11 @@ public class InventoryDAO {
 
                     psEquip.setInt(1, inventoryId);
                     psEquip.executeUpdate();
+                }catch (SQLException e){
+                    throw new RuntimeException(e);
                 }
+            }catch (SQLException e){
+                throw new RuntimeException(e);
             }
         }
         public static void unEquipItem(int inventoryId, int playerId){
